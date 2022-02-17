@@ -38,9 +38,9 @@ public class KalkulatorBMI {
                 // (increment)
                 if (bmi < 18.5) {
                     bawahNormal++;
-                } else if (bmi >= 18.5 && bmi <= 24.9) {
+                } else if (bmi >= 18.5 && bmi < 25) {
                     normal++;
-                } else if (bmi >= 25 && bmi <= 29.9) {
+                } else if (bmi >= 25 && bmi < 30) {
                     atasNormal++;
                 } else {
                     obesitas++;
