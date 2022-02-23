@@ -60,9 +60,14 @@ public class ValidasiKodeIMEI {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
 
-        while (n-- > 0) {
+        String[] valid = new String[n];
+
+        for (int i=0; i < n; i++) {
             long kode = sc.nextLong();
-            System.out.println(isValid(kode) ? "YES" : "NO");
+            valid[i] = (isValid(kode) ? "YES" : "NO");
+        }
+        for (int j=0; j < n; j++) {
+            System.out.println(valid[j]);
         }
         sc.close();
     }
