@@ -106,23 +106,39 @@ public class Lab03 {
 
     private static void deleteMusic() {
         //TODO:
-        System.out.println(playlist.length);
-        if (playlist.length == 0) {
+        int panjangPlaylist = playlist.length;
+        if (playlist.length == 1) {
             System.out.println("Minimal ada satu musiik dalam sistem");
         } else {
-            String[][] leftPart = Arrays.copyOfRange(playlist, 0, pointer);
-            String[][] rightPart = Arrays.copyOfRange(playlist, pointer+1, playlist.length);
+            // String[][] leftPart = Arrays.copyOfRange(playlist, 0, pointer);
+            // String[][] rightPart = Arrays.copyOfRange(playlist, pointer+1, playlist.length);
 
-            playlist = Arrays.copyOf(playlist, playlist.length-1);
-            for (int i = 0; i < pointer; i++) {
-                playlist[i] = leftPart[i];
+            // playlist = Arrays.copyOf(playlist, playlist.length-1);
+            // for (int i = 0; i < pointer; i++) {
+            //     playlist[i] = leftPart[i];
+            // }
+            // for (int j=0; j < (playlist.length-pointer); j++) {
+            //     // playlist[j+pointer+1] = rightPart[j];
+            //     playlist[j+pointer] = rightPart[j];
+            // }
+
+            String[][] newPlaylist = new String[playlist.length-1][];
+            for (int i=0,j=0; j<newPlaylist.length && i<playlist.length; i++) {
+                if (i == pointer) {
+                    continue;
+                } else {
+                    newPlaylist[j] = playlist[i];
+                    j++;
+                }
             }
-            for (int j=0; j < (playlist.length-pointer); j++) {
-                playlist[j+pointer+1] = rightPart[j] ;
+            playlist = Arrays.copyOf(newPlaylist, newPlaylist.length);
+
+            if (pointer == panjangPlaylist-1) {
+                pointer = 0;
             }
-            System.out.println(playlist.length);
-            pointer -= 1;
         }
+        indeksPlaylist--;
+        jumlahMusik--;
     }
 
     private static void detailsMusic() {
