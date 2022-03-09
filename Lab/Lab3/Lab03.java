@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.util.Arrays;
-// import org.apache.commons.lang.ArrayUtils;
 
 public class Lab03 {
     static int pointer = 0;
@@ -8,16 +7,15 @@ public class Lab03 {
     static Scanner in = new Scanner(System.in);
     static int jumlahMusik = 0;
 
-    static int indeksPlaylist = 0;
-
     public static void main(String[] args) {
         System.out.println("Selamat Datang di Pacilfy!");
 
         // TODO:
         // loop inisialisasi playlist minimal 1 lagu dimasukkan
         int perintah = 1;
+
+        // jika perintah != 0, maka akan tetap di dalam loop
         while (perintah != 0) {
-            jumlahMusik++;
             System.out.println("Silahkan masukkan lagu Anda");
             System.out.print("Judul : ");
             String judul = in.nextLine();
@@ -28,10 +26,11 @@ public class Lab03 {
             System.out.print("Tahun : ");
             String tahun = in.nextLine();
 
-            playlist[indeksPlaylist][0] = judul;
-            playlist[indeksPlaylist][1] = artist;
-            playlist[indeksPlaylist][2] = album;
-            playlist[indeksPlaylist][3] = tahun;
+            // menyimpan judul,artist,album,tahun ke dalam playlist
+            playlist[jumlahMusik][0] = judul;
+            playlist[jumlahMusik][1] = artist;
+            playlist[jumlahMusik][2] = album;
+            playlist[jumlahMusik][3] = tahun;
 
             System.out.println("Lanjut menambahkan lagu?");
             System.out.println("[1] Lanjut");
@@ -40,10 +39,13 @@ public class Lab03 {
             perintah = in.nextInt();
             in.nextLine();
 
+            // jika perintah = 1
             if (perintah == 1) {
-                indeksPlaylist++;
-                playlist = Arrays.copyOf(playlist, playlist.length + 1);
-                playlist[indeksPlaylist] = Arrays.copyOf(playlist[0], 4);
+                jumlahMusik++;
+
+                // menambah panjang playlist sebanyak 1
+                playlist = Arrays.copyOf(playlist, jumlahMusik+1);
+                playlist[jumlahMusik] = Arrays.copyOf(playlist[0], 4);
             }
         }
 
@@ -97,8 +99,13 @@ public class Lab03 {
 
     private static void nextMusic() {
         //TODO:
-        if (pointer == playlist.length-1) {
+
+        // jika yg di play adalah lagu terakhir, maka nextMusic
+        // akan play lagu pertama
+        if (pointer == jumlahMusik) {
             pointer = 0;
+
+        // jika bukan lagu terakhir, maka play lagu selanjutnya
         } else {
             pointer += 1;
         }
@@ -106,39 +113,38 @@ public class Lab03 {
 
     private static void deleteMusic() {
         //TODO:
-        int panjangPlaylist = playlist.length;
-        if (playlist.length == 1) {
+
+        // jika jumlah musik cuma ada 1
+        if (jumlahMusik == 0) {
             System.out.println("Minimal ada satu musiik dalam sistem");
+
+        // jika jumlah musik > 1
         } else {
-            // String[][] leftPart = Arrays.copyOfRange(playlist, 0, pointer);
-            // String[][] rightPart = Arrays.copyOfRange(playlist, pointer+1, playlist.length);
+            String[][] newPlaylist = new String[jumlahMusik][];
+            for (int i=0,j=0; j<jumlahMusik && i<jumlahMusik+1; i++) {
 
-            // playlist = Arrays.copyOf(playlist, playlist.length-1);
-            // for (int i = 0; i < pointer; i++) {
-            //     playlist[i] = leftPart[i];
-            // }
-            // for (int j=0; j < (playlist.length-pointer); j++) {
-            //     // playlist[j+pointer+1] = rightPart[j];
-            //     playlist[j+pointer] = rightPart[j];
-            // }
-
-            String[][] newPlaylist = new String[playlist.length-1][];
-            for (int i=0,j=0; j<newPlaylist.length && i<playlist.length; i++) {
+                // jika i = indeks lagu yg dihapus, maka lagu tsb tidak dimasukkan ke dalam newPlaylist
                 if (i == pointer) {
                     continue;
+
+                // memasukkan lagu yg tidak dihapus ke newPlaylist
                 } else {
                     newPlaylist[j] = playlist[i];
                     j++;
                 }
             }
-            playlist = Arrays.copyOf(newPlaylist, newPlaylist.length);
 
-            if (pointer == panjangPlaylist-1) {
+            // mengcopy newPlaylist ke dalam playlist
+            playlist = Arrays.copyOf(newPlaylist, jumlahMusik);
+
+            // jika lagu yg dihapus adalah lagu terakhir, maka akan di play lagu pertama
+            if (pointer == jumlahMusik) {
                 pointer = 0;
             }
+
+            // jumlah musik berkurang 1 tiap ada yg dihapus
+            jumlahMusik--;
         }
-        indeksPlaylist--;
-        jumlahMusik--;
     }
 
     private static void detailsMusic() {
@@ -146,8 +152,15 @@ public class Lab03 {
         boolean flag = false;
         System.out.print("Judul yang ingin dicari: ");
         String judul = in.nextLine();
+
+        // membuat judul menjadi lowercase
         judul = judul.toLowerCase();
-        for (int i=0; i < playlist.length; i++) {
+
+        // iterasi ke dalam playlist
+        for (int i=0; i <= jumlahMusik; i++) {
+
+            // jika judul yg dicari = judul lagu yg ada di playlist,
+            // maka akan ditampilkan detail
             if (judul.equals(playlist[i][0].toLowerCase())) {
                 System.out.println("Judul : " + playlist[i][0]);
                 System.out.println("Artist: " + playlist[i][1]);
@@ -156,6 +169,8 @@ public class Lab03 {
                 flag = true;
             }
         }
+        
+        // jika lagu yg dicari tidak ada di dalam playlist
         if (!flag) {
             System.out.println("Lagu tidak ditemukan");
         }
@@ -164,8 +179,12 @@ public class Lab03 {
 
     private static void prevMusic() {
         //TODO:
+
+        // jika lagu yg di play lagu pertama, maka akan di play lagu terakhir
         if (pointer == 0) {
-            pointer = playlist.length-1;
+            pointer = jumlahMusik;
+
+        // jika bukan lagu pertama, maka akan di play lagu sebelumnya
         } else {
             pointer -= 1;
         }
@@ -173,6 +192,8 @@ public class Lab03 {
 
     private static void addMusic() {
         //TODO:
+
+        // jumlah musik bertambah 1 tiap ada penambahan
         jumlahMusik++;
         System.out.println("Silahkan masukkan lagu Anda");
         System.out.print("Judul : ");
@@ -184,14 +205,15 @@ public class Lab03 {
         System.out.print("Tahun : ");
         String tahun = in.nextLine();
 
-        indeksPlaylist++;
-        playlist = Arrays.copyOf(playlist, playlist.length + 1);
-        playlist[indeksPlaylist] = Arrays.copyOf(playlist[0], 4);
+        // menambah panjang playlist sebanyak 1
+        playlist = Arrays.copyOf(playlist, jumlahMusik + 1);
+        playlist[jumlahMusik] = Arrays.copyOf(playlist[0], 4);
 
-        playlist[indeksPlaylist][0] = judul;
-        playlist[indeksPlaylist][1] = artist;
-        playlist[indeksPlaylist][2] = album;
-        playlist[indeksPlaylist][3] = tahun;
+        // menyimpan judul,artist,album,tahun ke dalam playlist
+        playlist[jumlahMusik][0] = judul;
+        playlist[jumlahMusik][1] = artist;
+        playlist[jumlahMusik][2] = album;
+        playlist[jumlahMusik][3] = tahun;
     }
 
 
