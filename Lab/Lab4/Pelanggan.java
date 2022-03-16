@@ -21,7 +21,7 @@ public class Pelanggan {
     // TODO: lengkapi method di bawah ini
     String addBarang(Barang barang, int banyakBarang){
 
-        boolean flag = false;
+        String output = nama + " berhasil menambahkan " + banyakBarang + " " + barang.getNama() +"\n";
 
         // jika stock barang masih ada
         if (barang.cekStock(banyakBarang)) {
@@ -29,11 +29,9 @@ public class Pelanggan {
             if (kapasitasKeranjang < (barang.getBeratBarang() * banyakBarang)){
                 int oldBanyakBarang = banyakBarang;
                 banyakBarang = kapasitasKeranjang / barang.getBeratBarang();
+               
+                output = "Maaf " + oldBanyakBarang + " " + barang.getNama() + " terlalu berat, tetapi " + banyakBarang + " " + barang.getNama() + " berhasil ditambahkan\n";
                 
-                if (!flag){
-                    System.out.printf("Maaf %d %s terlalu berat, tetapi %d %s berhasil ditambahkan\n", oldBanyakBarang, barang.getNama(), banyakBarang, barang.getNama());
-                    flag = true;
-                }
             }
 
             // kapasitas keranjang berkurang 
@@ -48,11 +46,7 @@ public class Pelanggan {
 
                     // mengurangi stok barang yg dibeli
                     barang.setStock(barang.getStock() - banyakBarang);
-                    if (!flag){
-                        System.out.printf("%s berhasil menambahkan %d %s\n", nama, banyakBarang, barang.getNama());
-                        flag = true;
-                    }
-                    return "";
+                    return output;
                 }
             }
             
@@ -61,19 +55,13 @@ public class Pelanggan {
             keranjang = Arrays.copyOf(keranjang, keranjang.length+1);
             keranjang[keranjang.length-1] = newOrder;
 
-            if (!flag){
-                System.out.printf("%s berhasil menambahkan %d %s\n", nama, banyakBarang, barang.getNama());
-                flag = true;
-            }
-
             // mengurangi stok barang yg dibeli
             barang.setStock(barang.getStock() - banyakBarang);
-            return "";
+            return output;
             
         }
-        System.out.printf("Stok %s kurang\n", barang.getNama());
 
-        return "";
+        return ("Stok " + barang.getNama() + " kurang\n");
     }
     
     // TODO: lengkapi method di bawah ini
