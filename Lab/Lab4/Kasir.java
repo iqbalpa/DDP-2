@@ -1,3 +1,5 @@
+// Kolaborator: Fresty Tania Stearine
+
 import java.io.*;
 import java.util.*;
 
@@ -33,19 +35,30 @@ public class Kasir {
     // TODO lengkapi method di bawah ini
     static String kasir(Pelanggan K){
         String output = "Pembelian " + K.getNama() + " berhasil:\n";
+
+        // jika uang yg dimiliki >= harga total barang
         if (K.getUang() >= K.totalHargaBarang()) {
+
+            // jika keranjang tidak kosong
             if (K.getKeranjang().length != 0) {
                 for (Order o: K.getKeranjang()){
                     output += "* " + o.getBarang().getNama() + " " + o.getBanyakBarang() + " = " + o.getBanyakBarang()*o.getBarang().getHarga() +"\n";
                 }
                 output += "* Total Belanjaan = " + K.totalHargaBarang() + "\n";
                 output += "* Sisa Uang = " + (K.getUang() - K.totalHargaBarang()) + "\n";
+
+                // menge-set uang = sisa uang
                 K.setUang(K.getUang() - K.totalHargaBarang());
+
                 K.resetKapasitasKeranjang();
                 K.resetKeranjang();
+
+            // jika keranjang kosong
             }else{
                 output = "Maaf tidak ada barang di keranjang " + K.getNama() + "\n";
             }
+        
+        // jika uang yg dimiliki < harga total barang
         } else {
             output = "Maaf " + K.getNama() + " tidak memiliki cukup uang\n";
         }

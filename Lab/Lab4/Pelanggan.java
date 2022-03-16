@@ -19,18 +19,21 @@ public class Pelanggan {
 
         String output = nama + " berhasil menambahkan " + banyakBarang + " " + barang.getNama() +"\n";
 
-        // jika stock barang masih ada
+        // jika stock barang cukup
         if (barang.cekStock(banyakBarang)) {
 
+            // jika kapasitas keranjang < beban barang baru
             if (kapasitasKeranjang < (barang.getBeratBarang() * banyakBarang)){
                 int oldBanyakBarang = banyakBarang;
+
+                // jumlah barang yg ingin dibeli dikurangi hingga cukup untuk masuk keranjang
                 banyakBarang = kapasitasKeranjang / barang.getBeratBarang();
                
                 output = "Maaf " + oldBanyakBarang + " " + barang.getNama() + " terlalu berat, tetapi " + banyakBarang + " " + barang.getNama() + " berhasil ditambahkan\n";
                 
             }
 
-            // kapasitas keranjang berkurang 
+            // kapasitas keranjang dikurangi beban barang baru
             kapasitasKeranjang -= barang.getBeratBarang() * banyakBarang;
 
             // cek apakah barang sudah ada di kerjanjang atau belum
@@ -38,6 +41,8 @@ public class Pelanggan {
 
                 // jika barang sudah ada di keranjang
                 if (b.getBarang().getNama().equals(barang.getNama())) {
+
+                    // tambah jumlah yg ada di keranjang
                     b.setBanyakBarang(b.getBanyakBarang() + banyakBarang);
 
                     // mengurangi stok barang yg dibeli
@@ -54,13 +59,14 @@ public class Pelanggan {
             // mengurangi stok barang yg dibeli
             barang.setStock(barang.getStock() - banyakBarang);
             return output;
-            
         }
 
+        // jika stok barang tidak cukup
         return ("Stok " + barang.getNama() + " kurang\n");
     }
     
     // TODO: lengkapi method di bawah ini
+    // mendapatkan total harga barang
     int totalHargaBarang(){
         int totalHarga = 0;
         for (Order b: keranjang) {
@@ -75,30 +81,32 @@ public class Pelanggan {
     }
 
     // Setter and Getter dan lengkapi modifier
-    String getNama() {
+    public String getNama() {
         return this.nama;
     }
 
-    void setNama(String nama) {
+    public void setNama(String nama) {
         this.nama = nama;
     }
 
-    int getUang() {
+    public int getUang() {
         return this.uang;
     }
 
-    void setUang(int uang) {
+    public void setUang(int uang) {
         this.uang = uang;
     }
 
-    Order[] getKeranjang() {
+    public Order[] getKeranjang() {
         return keranjang;
     }
 
+    // untuk mereset keranjang menjadi kosong
     void resetKeranjang() {
         this.keranjang = Arrays.copyOf(this.keranjang, 0);
     }
     
+    // untuk mereset kapasitas keranjang menjadi 5000
     void resetKapasitasKeranjang(){
         this.kapasitasKeranjang = 5000;
     }

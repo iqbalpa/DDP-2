@@ -15,6 +15,7 @@ public class Barang {
     }
       
     //TODO: Silakan cek stock
+    // jika stock lebih dari jumlah yg ingin dibeli user maka return true
     boolean cekStock(int stock){
         if (this.stock >= stock){
             return true;
