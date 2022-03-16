@@ -32,9 +32,7 @@ public class Kasir {
 
     // TODO lengkapi method di bawah ini
     static void kasir(Pelanggan K){
-        int uang = K.getUang();
-        int totalHarga = K.totalHargaBarang();
-        uang = uang - totalHarga;
+        K.setUang(K.getUang() - K.totalHargaBarang());
         K.resetKapasitasKeranjang();
         K.resetKeranjang();
     }
