@@ -9,10 +9,6 @@ public class Pelanggan {
     private int kapasitasKeranjang = 5000;
 
     //TODO: Buat Constructor
-    // public Pelanggan(String nama, int uang, int kapasitas) {
-    //     this.nama = nama;
-    //     this.uang = uang;
-    // }
     public Pelanggan(String nama, int uang) {
         this.nama = nama;
         this.uang = uang;
@@ -75,7 +71,7 @@ public class Pelanggan {
     
     // TODO: lengkapi method di bawah ini
     String cekUang(){
-        return "Uang " + nama + " sekarang " + uang;
+        return "Uang " + nama + " sekarang " + uang + "\n";
     }
 
     // Setter and Getter dan lengkapi modifier

@@ -31,10 +31,26 @@ public class Kasir {
     }
 
     // TODO lengkapi method di bawah ini
-    static void kasir(Pelanggan K){
-        K.setUang(K.getUang() - K.totalHargaBarang());
-        K.resetKapasitasKeranjang();
-        K.resetKeranjang();
+    static String kasir(Pelanggan K){
+        String output = "Pembelian " + K.getNama() + " berhasil:\n";
+        if (K.getUang() >= K.totalHargaBarang()) {
+            if (K.getKeranjang().length != 0) {
+                for (Order o: K.getKeranjang()){
+                    output += "* " + o.getBarang().getNama() + " " + o.getBanyakBarang() + " = " + o.getBanyakBarang()*o.getBarang().getHarga() +"\n";
+                }
+                output += "* Total Belanjaan = " + K.totalHargaBarang() + "\n";
+                output += "* Sisa Uang = " + (K.getUang() - K.totalHargaBarang()) + "\n";
+                K.setUang(K.getUang() - K.totalHargaBarang());
+                K.resetKapasitasKeranjang();
+                K.resetKeranjang();
+            }else{
+                output = "Maaf tidak ada barang di keranjang " + K.getNama() + "\n";
+            }
+        } else {
+            output = "Maaf " + K.getNama() + " tidak memiliki cukup uang\n";
+        }
+
+        return output;
     }
     
     public static void main(String[] args) {
@@ -84,7 +100,7 @@ public class Kasir {
             if (command.equals("KASIR")) {
                 String namaPelanggan = in.next();
                 Pelanggan plg = cariPelanggan(namaPelanggan);
-                kasir(plg);
+                out.print(kasir(plg));
             }
             
             if (command.equals("CEK_UANG")) {
