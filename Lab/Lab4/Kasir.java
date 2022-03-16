@@ -87,7 +87,7 @@ public class Kasir {
             int uang = in.nextInt();
 
             //TODO: Construct Pelanggan baru
-            Pelanggan newPelanggan = new Pelanggan(namaPelanggan, uang);
+            Pelanggan newPelanggan = new Pelanggan(namaPelanggan, uang, barang.length);
             pelanggan[j] = newPelanggan;
         }
         

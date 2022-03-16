@@ -9,7 +9,7 @@ public class Pelanggan {
     private int kapasitasKeranjang = 5000;
 
     //TODO: Buat Constructor
-    public Pelanggan(String nama, int uang) {
+    public Pelanggan(String nama, int uang, int kapasitas) {
         this.nama = nama;
         this.uang = uang;
     }
