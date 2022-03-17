@@ -40,9 +40,11 @@ public class Kasir {
         if (K.getUang() >= K.totalHargaBarang()) {
 
             // jika keranjang tidak kosong
-            if (K.getKeranjang().length != 0) {
+            if (K.getKeranjang()[0] != null) {
                 for (Order o: K.getKeranjang()){
-                    output += "* " + o.getBarang().getNama() + " " + o.getBanyakBarang() + " = " + o.getBanyakBarang()*o.getBarang().getHarga() +"\n";
+                    if (o != null) {
+                        output += "* " + o.getBarang().getNama() + " " + o.getBanyakBarang() + " = " + o.getBanyakBarang()*o.getBarang().getHarga() +"\n";
+                    }
                 }
                 output += "* Total Belanjaan = " + K.totalHargaBarang() + "\n";
                 output += "* Sisa Uang = " + (K.getUang() - K.totalHargaBarang()) + "\n";

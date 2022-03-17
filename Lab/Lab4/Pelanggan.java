@@ -1,17 +1,16 @@
-import java.util.Arrays;
-
 public class Pelanggan {
   
     //TODO: Tambahkan modifier
     private String nama;
     private int uang;
-    private Order[] keranjang = new Order[0];
+    private Order[] keranjang;
     private int kapasitasKeranjang = 5000;
 
     //TODO: Buat Constructor
     public Pelanggan(String nama, int uang, int kapasitas) {
         this.nama = nama;
         this.uang = uang;
+        this.keranjang = new Order[kapasitas];
     }
     
     // TODO: lengkapi method di bawah ini
@@ -39,22 +38,31 @@ public class Pelanggan {
             // cek apakah barang sudah ada di kerjanjang atau belum
             for(Order b: keranjang) {
 
-                // jika barang sudah ada di keranjang
-                if (b.getBarang().getNama().equals(barang.getNama())) {
+                if (b != null) {
 
-                    // tambah jumlah yg ada di keranjang
-                    b.setBanyakBarang(b.getBanyakBarang() + banyakBarang);
+                    // jika barang sudah ada di keranjang
+                    if (b.getBarang().getNama().equals(barang.getNama())) {
 
-                    // mengurangi stok barang yg dibeli
-                    barang.setStock(barang.getStock() - banyakBarang);
-                    return output;
+                        // tambah jumlah yg ada di keranjang
+                        b.setBanyakBarang(b.getBanyakBarang() + banyakBarang);
+
+                        // mengurangi stok barang yg dibeli
+                        barang.setStock(barang.getStock() - banyakBarang);
+                        return output;
+                    }
                 }
             }
             
             // jika barang belum ada di keranjang
-            Order newOrder = new Order(barang, banyakBarang);
-            keranjang = Arrays.copyOf(keranjang, keranjang.length+1);
-            keranjang[keranjang.length-1] = newOrder;
+            for (int i=0; i<this.keranjang.length; i++){
+                if (this.keranjang[i] != null) {
+                    continue;
+                } else {
+                    Order newOrder = new Order(barang, banyakBarang);
+                    this.keranjang[i] = newOrder;
+                    break;
+                }
+            }
 
             // mengurangi stok barang yg dibeli
             barang.setStock(barang.getStock() - banyakBarang);
@@ -70,7 +78,9 @@ public class Pelanggan {
     int totalHargaBarang(){
         int totalHarga = 0;
         for (Order b: keranjang) {
-            totalHarga += b.getBarang().getHarga() * b.getBanyakBarang();
+            if (b != null) {
+                totalHarga += b.getBarang().getHarga() * b.getBanyakBarang();
+            }
         }
         return totalHarga;
     }
@@ -103,7 +113,9 @@ public class Pelanggan {
 
     // untuk mereset keranjang menjadi kosong
     void resetKeranjang() {
-        this.keranjang = Arrays.copyOf(this.keranjang, 0);
+        for (int i=0; i<this.keranjang.length; i++){
+            this.keranjang[i] = null;
+        }
     }
     
     // untuk mereset kapasitas keranjang menjadi 5000
