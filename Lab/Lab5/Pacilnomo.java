@@ -25,11 +25,15 @@ public class Pacilnomo {
 		netWorth = earnings;
 		for (Aset aset: portofolio){
 
+			// networth ditambah dengan setiap jumlah aset dikalikan dg harganya
 			netWorth += aset.getHarga() * aset.getJumlah();
 
+			// jika aset adalah Saham
 			if (aset instanceof Saham){
 				jumlahSaham++;
-			} else {
+			} 
+			// jik aset adalah Obligasi
+			else {
 				jumlahObligasi++;
 			}
 		}
@@ -70,6 +74,7 @@ public class Pacilnomo {
 				double pertumbuhan = Double.valueOf(inp[4]);
 				double dividen = Double.valueOf(inp[5]);
 
+				// membuat object baru saham
 				Saham newSaham = new Saham(namaAset, jumlah, harga, pertumbuhan, dividen);
 				portofolio[i] = newSaham;
 
@@ -78,6 +83,7 @@ public class Pacilnomo {
 				double bunga = Double.valueOf(inp[4]);
 				int maturitas = Integer.valueOf(inp[5]);
 
+				// membuat object baru obligasi
 				Obligasi newObligasi = new Obligasi(namaAset, jumlah, harga, bunga, maturitas);
 				portofolio[i] = newObligasi;
 			} 

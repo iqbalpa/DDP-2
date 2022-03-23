@@ -16,9 +16,10 @@ public class Saham extends Aset {
 		grow();
 		
 		// TODO modifikasi harga sesuai dengan pertumbuhan sekarang dan tambahkan dividen ke earnings
-		Pacilnomo.addToEarnings(this.dividen * this.getHarga() * this.getJumlah());
-		double newHarga = this.pertumbuhan * this.getHarga();
+		// harga baru = harga lama + (harga lama * pertumbuhan)
+		double newHarga = this.getHarga() + (this.pertumbuhan * this.getHarga());
 		this.setHarga(newHarga);
+		Pacilnomo.addToEarnings(this.dividen * this.getHarga() * this.getJumlah());
 	}
 
 	// Linear congruential generator for subsequent growth
@@ -33,7 +34,7 @@ public class Saham extends Aset {
 	// TODO lengkapi method toString ini
 	@Override
 	public String toString() {
-		String output = String.format("Tipe: Saham%nHarga: %.2f%nJumlah: %d%nDividen: %.2f%nPertumbuhan: %.2f", this.getHarga(), this.getJumlah(), this.dividen, this.pertumbuhan);
+		String output = String.format("%s%nTipe: Saham%nHarga: %.2f%nJumlah: %d%nDividen: %.2f%nPertumbuhan: %.2f", this.getNama(), this.getHarga(), this.getJumlah(), this.dividen, this.pertumbuhan);
 
 		return output;
 	}

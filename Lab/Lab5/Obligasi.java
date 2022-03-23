@@ -15,13 +15,17 @@ public class Obligasi extends Aset {
 	@Override
 	void nextYear() {
 		// TODO validasi jatuh tempo
+		// jika jumlah tahun sama dengan maturitas, maka jatuh tempo akan true
 		if (this.getTahun() == this.maturitas){
 			this.jatuhTempo = true;
+			Pacilnomo.addToEarnings(this.bunga * this.getHarga() * this.getJumlah());
 		}
 		
+		super.nextYear();
+
+		// TODO tambahkan bunga ke total pendapatan Pacilnomo
+		// jika belum jatuh tempo, maka akan ditambahkan Bunga ke Earnings
 		if (!jatuhTempo){
-			super.nextYear();
-			// TODO tambahkan bunga ke total pendapatan Pacilnomo
 			Pacilnomo.addToEarnings(this.bunga * this.getHarga() * this.getJumlah());
 		}
 	}
@@ -29,7 +33,7 @@ public class Obligasi extends Aset {
 	// TODO lengkapi method toString ini
 	@Override
 	public String toString() {
-		String output = String.format("Tipe: Obligasi%nHarga: %.2f%nJumlah: %d%nBunga: %.2f%nJatuh Tempo: %b", this.getHarga(), this.getJumlah(), this.bunga, this.jatuhTempo);
+		String output = String.format("%s%nTipe: Obligasi%nHarga: %.2f%nJumlah: %d%nBunga: %.2f%nJatuh Tempo: %b", this.getNama(),this.getHarga(), this.getJumlah(), this.bunga, this.jatuhTempo);
 
 		return output;
 	}
