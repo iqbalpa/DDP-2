@@ -18,7 +18,6 @@ public class Obligasi extends Aset {
 		// jika jumlah tahun sama dengan maturitas, maka jatuh tempo akan true
 		if (this.getTahun() == this.maturitas){
 			this.jatuhTempo = true;
-			Pacilnomo.addToEarnings(this.bunga * this.getHarga() * this.getJumlah());
 		}
 		
 		super.nextYear();
