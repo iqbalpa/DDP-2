@@ -22,29 +22,42 @@ public class Pasien extends Warga {
 		// jika Warga X adalah Pasien, maka happiness bertambah 5
 		if (X instanceof Pasien){
 			this.happiness += 5;
+			
+			// untuk handle apabila happiness > 100 atau < 0
+			handleHappiness();
 		} 
 		// jika Warga X adalah Dokter
 		else {
 
-			// jika X adalah Dokter dengan keahlian yg sama dengan penyakit Pasien, maka
-			// Pasien akan sembuh dan happiness bertambah 20
-			if (((Dokter)X).getPenyakitKeahlian().equals(this.penyakit)){
-				this.pasienSembuh = true;
-				this.happiness += 20;
+			// jika Pasien masih sakit
+			if (!this.pasienSembuh) {
+
+				// jika X adalah Dokter dengan keahlian yg sama dengan penyakit Pasien, maka
+				// Pasien akan sembuh dan happiness bertambah 20
+				if (((Dokter)X).getPenyakitKeahlian().equals(this.penyakit)){
+					this.pasienSembuh = true;
+					this.happiness += 20;
+
+					// untuk handle apabila happiness > 100 atau < 0
+					handleHappiness();
+				}
 			}
 
 			// jika X adalah Dokter yg ramah
 			if (((Dokter)X).getDokterRamah()){
 				this.happiness += 10;
+
+				// untuk handle apabila happiness > 100 atau < 0
+				handleHappiness();
 			} 
 			// jika X adalah Dokter yg tidak ramah
 			else {
 				this.happiness -= 5;
+
+				// untuk handle apabila happiness > 100 atau < 0
+				handleHappiness();
 			}
 		}
-
-		// untuk handle apabila happines > 100 atau < 0
-		handleHappiness();
 	}
 
 	// TODO: Lengkapi toString dengan memanggil method toString milik superclass
