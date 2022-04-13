@@ -6,8 +6,6 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.*;
 
-import javax.crypto.AEADBadTagException;
-
 
 class RumahSakit {
 
@@ -23,9 +21,6 @@ class RumahSakit {
 			out.println(((Pasien)X).getStatusSembuh()); // TODO: Lengkapi dengan status kesembuhan pasien
 		} else { // Jika dokter
 			out.println(((Dokter)X).getJumlahPasienDitemui()); // TODO: Lengkapi dengan jumlah pasien yang ditemui dokter
-            // for(Warga orang: X.getLogInteraksi()){
-            //     out.println(orang.getNama());
-            // }
 		}
 
 

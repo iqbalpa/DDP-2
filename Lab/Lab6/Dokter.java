@@ -15,7 +15,11 @@ public class Dokter extends Warga {
 	// TODO: Lengkapi method berinteraksi untuk dokter
 	@Override
 	public void berinteraksi(Warga X){
+
+		// menambahkan Warga X ke LogInteraksi
 		addLogInteraksi(X);
+
+		// jika Warga X adalah Pasien, maka jumlahPasienDitemui bertambah 1
 		if (X instanceof Pasien){
 			this.jumlahPasienDitemui++;
 		}

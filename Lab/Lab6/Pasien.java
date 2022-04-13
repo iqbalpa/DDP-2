@@ -15,20 +15,35 @@ public class Pasien extends Warga {
 	// TODO: Lengkapi method berinteraksi untuk pasien
 	@Override
 	public void berinteraksi(Warga X) {
+
+		// menambahkan Warga X ke LogInteraksi
 		addLogInteraksi(X);
+
+		// jika Warga X adalah Pasien, maka happiness bertambah 5
 		if (X instanceof Pasien){
 			this.happiness += 5;
-		} else {
+		} 
+		// jika Warga X adalah Dokter
+		else {
+
+			// jika X adalah Dokter dengan keahlian yg sama dengan penyakit Pasien, maka
+			// Pasien akan sembuh dan happiness bertambah 20
 			if (((Dokter)X).getPenyakitKeahlian().equals(this.penyakit)){
 				this.pasienSembuh = true;
 				this.happiness += 20;
 			}
+
+			// jika X adalah Dokter yg ramah
 			if (((Dokter)X).getDokterRamah()){
 				this.happiness += 10;
-			} else {
+			} 
+			// jika X adalah Dokter yg tidak ramah
+			else {
 				this.happiness -= 5;
 			}
 		}
+
+		// untuk handle apabila happines > 100 atau < 0
 		handleHappiness();
 	}
 
@@ -50,6 +65,7 @@ public class Pasien extends Warga {
 		return this.penyakit;
 	}
 
+	// untuk handle jika happiness > 100 atau < 0
 	public void handleHappiness(){
 		if (this.happiness > 100){
 			this.happiness = 100;
