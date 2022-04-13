@@ -15,15 +15,21 @@ public class Pasien extends Warga {
 	// TODO: Lengkapi method berinteraksi untuk pasien
 	@Override
 	public void berinteraksi(Warga X) {
-		if ((Pasien)X instanceof Pasien){
+		addLogInteraksi(X);
+		if (X instanceof Pasien){
 			this.happiness += 5;
 		} else {
+			if (((Dokter)X).getPenyakitKeahlian().equals(this.penyakit)){
+				this.pasienSembuh = true;
+				this.happiness += 20;
+			}
 			if (((Dokter)X).getDokterRamah()){
 				this.happiness += 10;
 			} else {
 				this.happiness -= 5;
 			}
 		}
+		handleHappiness();
 	}
 
 	// TODO: Lengkapi toString dengan memanggil method toString milik superclass
@@ -42,6 +48,14 @@ public class Pasien extends Warga {
 
 	public String getPenyakit() {
 		return this.penyakit;
+	}
+
+	public void handleHappiness(){
+		if (this.happiness > 100){
+			this.happiness = 100;
+		} else if (this.happiness < 0){
+			this.happiness = 0;
+		}
 	}
 
 }

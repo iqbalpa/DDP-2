@@ -6,6 +6,8 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.*;
 
+import javax.crypto.AEADBadTagException;
+
 
 class RumahSakit {
 
@@ -16,17 +18,20 @@ class RumahSakit {
 
     static private void handleLog(Warga X) {
 		//TODO: Lengkapi conditional jika X adalah seorang pasien
-		if (...) { // Jika pasien
-			out.println(...); // TODO: Lengkapi dengan happiness pasien
-			out.println((...); // TODO: Lengkapi dengan status kesembuhan pasien
+		if (X instanceof Pasien) { // Jika pasien
+			out.println(((Pasien)X).getHappiness()); // TODO: Lengkapi dengan happiness pasien
+			out.println(((Pasien)X).getStatusSembuh()); // TODO: Lengkapi dengan status kesembuhan pasien
 		} else { // Jika dokter
-			out.println(...); // TODO: Lengkapi dengan jumlah pasien yang ditemui dokter
+			out.println(((Dokter)X).getJumlahPasienDitemui()); // TODO: Lengkapi dengan jumlah pasien yang ditemui dokter
+            // for(Warga orang: X.getLogInteraksi()){
+            //     out.println(orang.getNama());
+            // }
 		}
 
 
 		for (int i = 0; i < X.getLogInteraksi().length; i++){ // ArrayList.size() digunakan untuk mencari ukuran arraylist
 			out.println(X.getLogInteraksi()[i]); // ArrayList.get(i) digunakan untuk mengambil isi dari arraylist pada index ke-i
-		}
+        }
 		out.println("------------");;
         
     }
@@ -79,11 +84,14 @@ class RumahSakit {
 					String penyakitKeahlian = in.next();
 					boolean dokterRamah = in.next().equals("Yes") ? true : false;
 					// TODO: Buat objek Dokter dan masukkan ke dalam Map daftarWarga dengan memanggil method masukkanKeMap(nama, objekDokter)
-					
+					Dokter newDokter = new Dokter(nama, penyakitKeahlian, dokterRamah);
+                    masukkanKeDaftarWarga((Warga) newDokter);
+
 				} else {
 					String penyakit = in.next();
 					// TODO: Buat objek Pasien dan masukkan ke dalam Map daftarWarga dengan memanggil method masukkanKeMap(nama, objekPasien)
-					
+					Pasien newPasien = new Pasien(nama, penyakit);
+                    masukkanKeDaftarWarga((Warga) newPasien);
 				}
             } else if(event.equals("INTERAKSI")) {
                 String X = in.next();

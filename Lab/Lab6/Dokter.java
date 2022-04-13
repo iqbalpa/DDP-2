@@ -5,20 +5,17 @@ public class Dokter extends Warga {
 	private boolean dokterRamah;
 	
 	// TODO: Lengkapi constructor
-	Dokter(String nama, String keahlian, String keramahan) {
+	Dokter(String nama, String keahlian, Boolean keramahan) {
 		super(nama);
 		this.penyakitKeahlian = keahlian;
 		this.jumlahPasienDitemui = 0;
-		if (keramahan.equals("Yes")){
-			this.dokterRamah = true;
-		} else {
-			this.dokterRamah = false;
-		}
+		this.dokterRamah = keramahan;
 	}
 
 	// TODO: Lengkapi method berinteraksi untuk dokter
 	@Override
 	public void berinteraksi(Warga X){
+		addLogInteraksi(X);
 		if (X instanceof Pasien){
 			this.jumlahPasienDitemui++;
 		}
