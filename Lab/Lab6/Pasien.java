@@ -34,7 +34,7 @@ public class Pasien extends Warga {
 
 				// jika X adalah Dokter dengan keahlian yg sama dengan penyakit Pasien, maka
 				// Pasien akan sembuh dan happiness bertambah 20
-				if (((Dokter)X).getPenyakitKeahlian().equals(this.penyakit)){
+				if (((Dokter)X).getPenyakitKeahlian().toLowerCase().equals(this.penyakit.toLowerCase())){
 					this.pasienSembuh = true;
 					this.happiness += 20;
 
