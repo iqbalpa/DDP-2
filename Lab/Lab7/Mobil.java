@@ -28,7 +28,7 @@ abstract class Mobil {
             if (this.persenFuel == 0){
                 return "Bensin habis!";
             } else {
-                this.engineBehaviour.gas(this.persenFuel);
+                this.setPersenFuel(this.engineBehaviour.gas(this.persenFuel));
                 String Z = "";
                 if (this.jenis.equals("Air")){
                     Z = "Laut";
@@ -37,7 +37,7 @@ abstract class Mobil {
                 } else {
                     Z = "Raya";
                 }
-                return String.format("%s digas dengan cepat di %s! Bahan bakar mobil %s sekarang %d%.", this.nama, Z, this.bahanBakar, this.persenFuel);
+                return String.format("%s digas dengan cepat di %s! Bahan bakar mobil %s sekarang %d", this.nama, Z, this.bahanBakar, this.persenFuel) + "%.";
             }
         } else {
             return "Nyalakan mobil dulu!";
