@@ -19,27 +19,45 @@ abstract class Mobil {
     // TODO: Lengkapi method ini
     public String start(){
         this.isOn = true;
+
+        // memanggil fungsi start di EngineBehaviour dan mereturn output string yg sesuai
         return this.engineBehaviour.start(this);
     }
 
     // TODO: Lengkapi method ini
     public String gas(){
+
+        // jika mobil sudah menyala
         if (this.isOn){
+
+            // jika bensin habis
             if (this.persenFuel == 0){
                 return "Bensin habis!";
-            } else {
+            } 
+            // jika bensin masih ada
+            else {
+
+                // bensin berkurang sesuai EngineBehaviour
                 this.setPersenFuel(this.engineBehaviour.gas(this.persenFuel));
                 String Z = "";
+
+                // jika jenis adalah Air, maka ngegas di Laut
                 if (this.jenis.equals("Air")){
                     Z = "Laut";
-                } else if (this.jenis.equals("Terbang")){
+                } 
+                // jika jenis adalah Terbang, maka ngegas di Langit
+                else if (this.jenis.equals("Terbang")){
                     Z = "Langit";
-                } else {
+                } 
+                // jika jenis adalah Truk, maka ngegas di Raya
+                else {
                     Z = "Raya";
                 }
                 return String.format("%s digas dengan cepat di %s! Bahan bakar mobil %s sekarang %d", this.nama, Z, this.bahanBakar, this.persenFuel) + "%.";
             }
-        } else {
+        } 
+        // jika mobil belum menyala
+        else {
             return "Nyalakan mobil dulu!";
         }
     }
@@ -47,6 +65,8 @@ abstract class Mobil {
     // TODO: Lengkapi method ini
     public String stop(){
         this.isOn = false;
+
+        // memanggil fungsi stop di EngineBehavior dan mereturn string yg sesuai
         return this.engineBehaviour.stop(this);
     }
   

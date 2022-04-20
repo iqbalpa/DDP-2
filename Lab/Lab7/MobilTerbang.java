@@ -8,9 +8,15 @@ public class MobilTerbang extends Mobil{ //TODO: impelementasikan sesuai UML dia
     // TODO: Lengkapi method ini
     @Override
     public String isiBahanBakar(){
+
+        // jika mobil masih menyala
         if (this.getIsOn()){
             return "Mobil masih menyala, matikan terlebih dahulu agar tidak jatuh.";
-        } else {
+        } 
+        // jka mobil sudah mati
+        else {
+
+            // set persenFuel ke 100%
             this.setPersenFuel(100);
             return String.format("%s sekarang sudah penuh, mobil dapat terbang kembali!", this.getBahanBakar());    
         }
@@ -19,6 +25,8 @@ public class MobilTerbang extends Mobil{ //TODO: impelementasikan sesuai UML dia
     // TODO: Lengkapi method ini
     @Override
     public String[] simulasi(){
+
+        // output berisi string-string dari fungsi start, gas, stop, isiBahanBakar
         String[] output = new String[5];
         output[0] = this.start();
         for (int i=0; i<2; i++){
