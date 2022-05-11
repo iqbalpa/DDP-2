@@ -39,7 +39,7 @@ public class CurrencyConversionFrame extends JFrame {
         // TO DO: Membuat dropdown menu
         JComboBox<String> dropdownMenuFrom = new JComboBox<>(currency);
         JComboBox<String> dropdownMenuTo = new JComboBox<>(currency);
-        dropdownMenuTo.setSelectedIndex(1);
+        dropdownMenuTo.setSelectedIndex(1); // set default selected value dropdownMenuTo ke Euro
 
         labelFrom = new JLabel("From");
         labelTo = new JLabel("To");
@@ -47,7 +47,7 @@ public class CurrencyConversionFrame extends JFrame {
         // TO DO: Membuat textfield 
         JTextField textFieldFrom = new JTextField(20);
         JTextField textFieldTo = new JTextField(20);
-        textFieldTo.setEditable(false);
+        textFieldTo.setEditable(false); // set textfieldTo menjadi tidak bisa diubah
 
 
         convertButton = new JButton("Convert");
@@ -75,10 +75,15 @@ public class CurrencyConversionFrame extends JFrame {
         convertButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 // TO DO: implementasikan pemanggilan method ConvertCurrency
+                // mendapatkan jenis currency dari From
                 String fromCurrency = (String) dropdownMenuFrom.getSelectedItem();
+                // mendapatkan jenis currency dari To
                 String toCurrency = (String) dropdownMenuTo.getSelectedItem();
+                // mendapatkan nilai yg ingin dikonversi
                 String fromValue = textFieldFrom.getText();
+                // mengonversi nilai
                 String toValue = ConvertCurrency(fromValue, fromCurrency, toCurrency);
+                // menampilkan hasil konversi di textfieldTo
                 textFieldTo.setText(toValue);
             }
         });
