@@ -23,7 +23,11 @@ public class Main {
             int prioritas = in.nextInt();
             int tingkatKepedasan = in.nextInt();
             // TODO: tambahkan ke daftarMakanan
+
+            // buat object makanan baru
             Makanan newMakanan = new Makanan(namaMakanan, harga, prioritas, tingkatKepedasan);
+
+            // tambah makanan baru ke daftar makanan
             daftarMakanan.tambahPesanan(newMakanan);
         }
 
@@ -33,7 +37,11 @@ public class Main {
             int prioritas = in.nextInt();
             boolean isPakeEs = in.next().equals("YES");
             // TODO: tambahkan ke daftarMinuman
+
+            // buat object minuman baru
             Minuman newMinuman = new Minuman(namaMinuman, harga, prioritas, isPakeEs);
+
+            // tambah minuman baru ke daftar minuman
             daftarMinuman.tambahPesanan(newMinuman);
         }
 
@@ -47,17 +55,25 @@ public class Main {
 
             if (tipe.equals("MAKANAN")) {
                 // TODO: serve makanan
+
+                // jika makanan sudah disajikan semua
                 if (daftarMakanan.getJumlahPesanan() == 0){
                     out.println("Semua makanan telah disajikan!");
-                } else {
+                } 
+                // jika makanan masih ada yg akan disajikan
+                else {
                     Makanan makanan = daftarMakanan.nextPesanan();
                     out.println(makanan.toString() + " telah disajikan.");
                 }
             } else {
                 // TODO: serve minuman
+
+                // jika minuman sudah disajikan semua
                 if (daftarMinuman.getJumlahPesanan() == 0){
                     out.println("Semua minuman telah disajikan!");
-                } else {
+                } 
+                // jika minuman masih ada yg akan disajikan
+                else {
                     Minuman minuman = daftarMinuman.nextPesanan();
                     out.println(minuman.toString() + " telah disajikan.");
                 }

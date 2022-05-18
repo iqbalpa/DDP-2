@@ -7,6 +7,7 @@ public class DaftarPesanan<T extends Pesanan> {
 
     public DaftarPesanan() {
         // TODO: Lengkapi Constructor berikut
+        // buat ArrayList pesanans
         this.pesanans = new ArrayList<T>();
     }
 
@@ -18,12 +19,19 @@ public class DaftarPesanan<T extends Pesanan> {
     public T nextPesanan() {
         // TODO: return sesuai dengan urutan prioritas
         Collections.sort(pesanans);
+
+        // mendapatkan pesanan prioritas tertinggi
         T pesanan = this.pesanans.get(0);
+
+        // menghapus pesanan prioritas tertinggi
         this.pesanans.remove(0);
+
+        // mengembalikan pesanan prioritas tertinggi
         return pesanan;
     }
 
     // Tambahkan getter-setter apabila diperlukan
+    // mendapatkan jumlah pesanan
     public int getJumlahPesanan() {
         return this.pesanans.size();
     }

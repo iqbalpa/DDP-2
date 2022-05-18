@@ -11,6 +11,8 @@ public class Pesanan implements Comparable<Pesanan> {
         this.prioritas = prioritas;
     }
 
+    // override compareTo sehingga apabila di sorting, 
+    // maka akan berdasarkan prioritas
     @Override
     public int compareTo(Pesanan o) {
         // TODO: Lengkapi method ini
