@@ -58,7 +58,7 @@ public class Main {
 
                 // jika makanan sudah disajikan semua
                 if (daftarMakanan.getJumlahPesanan() == 0){
-                    out.println("Semua makanan telah disajikan!");
+                    out.println("Semua pesanan makanan telah disajikan!");
                 } 
                 // jika makanan masih ada yg akan disajikan
                 else {
@@ -70,7 +70,7 @@ public class Main {
 
                 // jika minuman sudah disajikan semua
                 if (daftarMinuman.getJumlahPesanan() == 0){
-                    out.println("Semua minuman telah disajikan!");
+                    out.println("Semua pesanan minuman telah disajikan!");
                 } 
                 // jika minuman masih ada yg akan disajikan
                 else {
